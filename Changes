@@ -1,6 +1,9 @@
 Changelog for POE-Component-Client-RADIUS
 =========================================
 
+1.00	Thu May 28 23:40:30 BST 2009
+	- Fixed warnings about 'Framed'
+
 0.06	Mon Dec 15 14:50:13 GMT 2008
 	- Determine our own IP address a bit more intelligently.
 
@@ -14,3 +17,4 @@ Changelog for POE-Component-Client-RADIUS
 
 0.01	Tue Jan 29 13:19:48 GMT 2008
 	- Initial CPAN Release
+

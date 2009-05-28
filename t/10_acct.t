@@ -34,7 +34,7 @@ sub test_start {
 	type => 'Start',
 	attributes => { 
 		'User-Name' => 'bingos',
-		'Service-Type' => 'Framed',
+		'Service-Type' => '2',
 		'Framed-Protocol' => 'PPP',
 		'NAS-Port' => 1234,
 		'NAS-Identifier' => 'PerlTester',

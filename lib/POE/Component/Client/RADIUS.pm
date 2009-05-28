@@ -10,7 +10,7 @@ use Net::Radius::Packet;
 use Math::Random;
 use vars qw($VERSION);
 
-$VERSION = '0.06';
+$VERSION = '1.00';
 
 use constant DATAGRAM_MAXLEN => 4096;
 use constant RADIUS_PORT => 1812;
@@ -211,7 +211,7 @@ sub _command {
      $args->{authenticator} = _bigrand();
      $req->set_code('Access-Request');
      $req->set_attr('User-Name' => $args->{username});
-     $req->set_attr('Service-Type' => 'Framed');
+     $req->set_attr('Service-Type' => '2');
      $req->set_attr('Framed-Protocol' => 'PPP');
      $req->set_attr('NAS-Port' => 1234);
      $req->set_attr('NAS-Identifier' => 'PoCoClientRADIUS');
@@ -499,7 +499,7 @@ of RADIUS requests on your behalf. Or you may use 'authenticate' and 'accounting
 
 =over
 
-=item spawn
+=item C<spawn>
 
 Creates a new POE::Component::Client::RADIUS session that may be used lots of times. Takes the following parameters:
 
@@ -509,7 +509,7 @@ Creates a new POE::Component::Client::RADIUS session that may be used lots of ti
 
 Returns an POE::Component::Client::RADIUS object.
 
-=item authenticate
+=item C<authenticate>
 
 Creates a one-shot POE::Component::Client::RADIUS session that will send an authentication request, receive the response and then
 terminates. Takes the following mandatory parameters:
@@ -527,7 +527,7 @@ Check with the RADIUS RFC L<http://www.faqs.org/rfcs/rfc2138.html> for details.
 
 One can also pass arbitary data which will be passed back in the response event. It is advised that one uses an underscore prefix to avoid clashes with future versions.
 
-=item accounting
+=item C<accounting>
 
 Creates a one-shot POE::Component::Client::RADIUS session that will send an accounting request, receive the response and then
 terminates. Takes the following mandatory parameters:
@@ -549,11 +549,11 @@ One can also pass arbitary data which will be passed back in the response event.
 
 =over
 
-=item session_id
+=item C<session_id>
 
 Takes no arguments. Returns the POE Session ID of the component.
 
-=item shutdown
+=item C<shutdown>
 
 Terminates the component.
 
@@ -565,7 +565,7 @@ When C<spawn>ed, the component will accept the following events:
 
 =over
 
-=item authenticate
+=item C<authenticate>
 
 Send an authentication request, receive the response and trigger a result event back to the sending session.
 Takes the following mandatory parameters:
@@ -582,7 +582,7 @@ Check with the RADIUS RFC L<http://www.faqs.org/rfcs/rfc2138.html> for details.
 
 One can also pass arbitary data which will be passed back in the response event. It is advised that one uses an underscore prefix to avoid clashes with future versions.
 
-=item accounting
+=item C<accounting>
 
 Send an accounting request, receive the response and trigger a result event back to the sending session.
 Takes the following mandatory parameters:
@@ -597,7 +597,7 @@ Check with the RADIUS Accounting RFC L<http://www.faqs.org/rfcs/rfc2866.html> fo
 
 One can also pass arbitary data which will be passed back in the response event. It is advised that one uses an underscore prefix to avoid clashes with future versions.
 
-=item shutdown
+=item C<shutdown>
 
 Terminates the component.
 
@@ -626,7 +626,7 @@ Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
 
 =head1 LICENSE
 
-Copyright L<(c)> Chris Williams
+Copyright E<copy> Chris Williams
 
 This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
@@ -639,3 +639,5 @@ L<http://en.wikipedia.org/wiki/RADIUS>
 L<http://www.faqs.org/rfcs/rfc2138.html>
 
 L<http://www.faqs.org/rfcs/rfc2866.html>
+
+=cut
