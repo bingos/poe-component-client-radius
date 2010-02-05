@@ -10,7 +10,7 @@ use Net::Radius::Packet;
 use Math::Random;
 use vars qw($VERSION);
 
-$VERSION = '1.00';
+$VERSION = '1.02';
 
 use constant DATAGRAM_MAXLEN => 4096;
 use constant RADIUS_PORT => 1812;
@@ -94,7 +94,7 @@ sub _create {
 	warn "You must specify 'type' for an accounting request\n";
 	return;
      }
-     $opts{port} = RADIUS_PORT if $command eq 'authenicate' and !$opts{port};
+     $opts{port} = RADIUS_PORT if $command eq 'authenticate' and !$opts{port};
      $opts{port} = ACCOUNTING_PORT if $command eq 'accounting' and !$opts{port};
   }
   $self->{session_id} = POE::Session->create(
@@ -200,7 +200,7 @@ sub _command {
 	warn "You must specify 'type' for an accounting request\n";
 	return;
      }
-     $args->{port} = RADIUS_PORT if $state eq 'authenicate' and !$args->{port};
+     $args->{port} = RADIUS_PORT if $state eq 'authenticate' and !$args->{port};
      $args->{port} = ACCOUNTING_PORT if $state eq 'accounting' and !$args->{port};
      $kernel->refcount_increment( $args->{sender_id}, __PACKAGE__ );
   }
