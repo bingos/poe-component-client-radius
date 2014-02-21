@@ -113,7 +113,9 @@ sub _create {
 
 sub _allocate_identifier {
   while (1) {
-    last unless exists $active_identifiers{ ++$current_id };
+    ++$current_id;
+    $current_id = 1 if $current_id > 255;
+    last unless exists $active_identifiers{ $current_id };
   }
   return $active_identifiers{$current_id} = $current_id;
 }
@@ -295,7 +297,7 @@ sub _get_datagram {
      $kernel->yield( '_dispatch', $data );
      return;
   }
-  my $reply = { 
+  my $reply = {
      map { ( $_, $resp->attr($_) ) } $resp->attributes()
   };
   $reply->{Code} = $resp->code;
